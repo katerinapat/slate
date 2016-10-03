@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,8 +102,6 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,8 +110,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/katerinapat/users-api-rh'>Feel free to fork the project on Github</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -121,167 +118,451 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the users API rh! You can use the API to access user API endpoints, which can get information on various informations regarding to a user, such as his location, pictures of him and any available contact information.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
 <h1 id="authentication">Authentication</h1>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>users API rh is public to the world. 
+So you are allowed to access API endpoints without authenication</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h1 id="users">Users</h1>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<h2 id="get-all-users">Get All Users</h2>
+<pre class="highlight shell"><code>curl https://users-api-rh.herokuapp.com/api/v1/users
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"object"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gender"</span><span class="p">:</span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"miss"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"alison"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"reid"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"alison.reid@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="s2">"tinywolf709"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="s2">"rockon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salt"</span><span class="p">:</span><span class="s2">"lypI10wj"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"md5"</span><span class="p">:</span><span class="s2">"bbdd6140e188e3bf68ae7ae67345df65"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha1"</span><span class="p">:</span><span class="s2">"4572d25c99aa65bbf0368168f65d9770b7cacfe6"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha256"</span><span class="p">:</span><span class="s2">"ec0705aec7393e2269d4593f248e649400d4879b2209f11bb2e012628115a4eb"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"registered"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"dob"</span><span class="p">:</span><span class="mi">932871968</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phone"</span><span class="p">:</span><span class="s2">"031-541-9181"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cell"</span><span class="p">:</span><span class="s2">"081-647-4650"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PPS"</span><span class="p">:</span><span class="s2">"3302243T"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"locations"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street"</span><span class="p">:</span><span class="s2">"1097 the avenue"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="s2">"Newbridge"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="s2">"ohio"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="mi">28782</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"pictures"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"large"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/women/60.jpg"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"medium"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/med/women/60.jpg"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/thumb/women/60.jpg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all users.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">GET https://users-api-rh.herokuapp.com/api/v1/users</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id="get-a-specific-user">Get a Specific User</h2>
+<pre class="highlight shell"><code>curl https://users-api-rh.herokuapp.com/api/v1/users/1
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"object"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gender"</span><span class="p">:</span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"miss"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"alison"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"reid"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"alison.reid@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="s2">"tinywolf709"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="s2">"rockon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salt"</span><span class="p">:</span><span class="s2">"lypI10wj"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"md5"</span><span class="p">:</span><span class="s2">"bbdd6140e188e3bf68ae7ae67345df65"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha1"</span><span class="p">:</span><span class="s2">"4572d25c99aa65bbf0368168f65d9770b7cacfe6"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha256"</span><span class="p">:</span><span class="s2">"ec0705aec7393e2269d4593f248e649400d4879b2209f11bb2e012628115a4eb"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"registered"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"dob"</span><span class="p">:</span><span class="mi">932871968</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phone"</span><span class="p">:</span><span class="s2">"031-541-9181"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cell"</span><span class="p">:</span><span class="s2">"081-647-4650"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PPS"</span><span class="p">:</span><span class="s2">"3302243T"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"locations"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street"</span><span class="p">:</span><span class="s2">"1097 the avenue"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="s2">"Newbridge"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="s2">"ohio"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="mi">28782</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"pictures"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"large"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/women/60.jpg"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"medium"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/med/women/60.jpg"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/thumb/women/60.jpg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>This endpoint retrieves a specific user.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">GET https://users-api-rh.herokuapp.com/api/v1/users/&lt;ID&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>string</td>
+<td>The ID of the user to retrieve</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-user">Create a User</h2>
+<pre class="highlight shell"><code>curl --data <span class="s2">"first_name=katerina"</span> https://users-api-rh.herokuapp.com/api/v1/users/
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"User with ID::ID created successfully"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint create a new instance of a user.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://users-api-rh.herokuapp.com/api/v1/users/PARAMETERS</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>The title of the user</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>string</td>
+<td>The name of the user</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+<td>The last name of the user</td>
+</tr>
+<tr>
+<td>registered</td>
+<td>integer</td>
+<td>When the user is registered</td>
+</tr>
+<tr>
+<td>street</td>
+<td>string</td>
+<td>street of the user</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>the city of the user</td>
+</tr>
+</tbody></table>
+
+<h2 id="update-a-user">Update a User</h2>
+<pre class="highlight shell"><code>curl -X PUT -d <span class="nv">title</span><span class="o">=</span>mrs  -d <span class="nv">first_name</span><span class="o">=</span>katerina https://users-api-rh.herokuapp.com/api/v1/users/1
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"User with ID:1 updated successfully"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint update a specific fields of the user.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT https://users-api-rh.herokuapp.com/api/v1/users/PARAMETERS</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>The ID of the user that will update</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+<td>Updates the last name of the user</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Updates the last name of the user</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete-a-specific-user">Delete a specific User</h2>
+<pre class="highlight shell"><code>curl -X <span class="s2">"DELETE"</span> https://users-api-rh.herokuapp.com/api/v1/users/:ID
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"User with ID::ID deleted successfully"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint update a specific fields of the user.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://users-api-rh.herokuapp.com/api/v1/users/PARAMETERS</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>The ID of the user that will be deleted</td>
+</tr>
+</tbody></table>
+
+<h1 id="search">Search</h1>
+
+<h2 id="search-query">Search query</h2>
+<pre class="highlight shell"><code>curl https://users-api-rh.herokuapp.com/api/v1/users/search?q<span class="o">=</span>wal
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">  
+   </span><span class="p">{</span><span class="w">  
+      </span><span class="nt">"object"</span><span class="p">:{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"gender"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"mr"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"john"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"wallace"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"john.wallace@example.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"username"</span><span class="p">:</span><span class="s2">"yellowelephant285"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"password"</span><span class="p">:</span><span class="s2">"infantry"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"salt"</span><span class="p">:</span><span class="s2">"eF2hvNgI"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"md5"</span><span class="p">:</span><span class="s2">"4424816b186a17e53f6ab411294dd993"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"sha1"</span><span class="p">:</span><span class="s2">"78c5b05999b876a093d329a4235d0902fd89c23f"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"sha256"</span><span class="p">:</span><span class="s2">"3ef7321aa09b09eeba37225be12475c44330b94c3f55fe646398e986823df20f"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"registered"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"dob"</span><span class="p">:</span><span class="mi">962253785</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"phone"</span><span class="p">:</span><span class="s2">"011-317-5827"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"cell"</span><span class="p">:</span><span class="s2">"081-087-0635"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"PPS"</span><span class="p">:</span><span class="s2">"5633289T"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"locations"</span><span class="p">:[</span><span class="w">  
+         </span><span class="p">{</span><span class="w">  
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"street"</span><span class="p">:</span><span class="s2">"7348 the avenue"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="s2">"Tuam"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="s2">"illinois"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zip"</span><span class="p">:</span><span class="mi">52871</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">40</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"pictures"</span><span class="p">:[</span><span class="w">  
+         </span><span class="p">{</span><span class="w">  
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"large"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/men/24.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"medium"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/med/men/24.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/thumb/men/24.jpg"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="p">{</span><span class="w">  
+      </span><span class="nt">"object"</span><span class="p">:{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"gender"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"mr"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"walter"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"smythe"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"walter.smythe@example.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"username"</span><span class="p">:</span><span class="s2">"heavybutterfly622"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"password"</span><span class="p">:</span><span class="s2">"sucking"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"salt"</span><span class="p">:</span><span class="s2">"9vxGlFWX"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"md5"</span><span class="p">:</span><span class="s2">"74605c416e65880e0c6e18507503f561"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"sha1"</span><span class="p">:</span><span class="s2">"d3542f1cd948dff7156b3b4a822fb2bc8472ef4d"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"sha256"</span><span class="p">:</span><span class="s2">"6007eb13dd433b4d023b5938a7e37455c0f925c590e29fcc355afbc1dd723c40"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"registered"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"dob"</span><span class="p">:</span><span class="mi">765400665</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"phone"</span><span class="p">:</span><span class="s2">"031-245-1812"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"cell"</span><span class="p">:</span><span class="s2">"081-917-4018"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"PPS"</span><span class="p">:</span><span class="s2">"4491944T"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"locations"</span><span class="p">:[</span><span class="w">  
+         </span><span class="p">{</span><span class="w">  
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"street"</span><span class="p">:</span><span class="s2">"8485 boghall road"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="s2">"Kildare"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="s2">"rhode island"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zip"</span><span class="p">:</span><span class="mi">50269</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">46</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"pictures"</span><span class="p">:[</span><span class="w">  
+         </span><span class="p">{</span><span class="w">  
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"user_id"</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"large"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/men/91.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"medium"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/med/men/91.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="s2">"https://randomuser.me/api/portraits/thumb/men/91.jpg"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+
+</span></code></pre>
+
+<p>This endpoint search and retrieves all users that their first name or last name match the query.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://users-api-rh.herokuapp.com/api/v1/users/search?q=query</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>string</td>
+<td>Search with the value of this parameter</td>
+</tr>
+</tbody></table>
+
+<h1 id="filter">Filter</h1>
+
+<h2 id="sort">Sort</h2>
+<pre class="highlight shell"><code>curl https://users-api-rh.herokuapp.com/api/v1/users?sort
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span></code></pre>
+
+<p>This endpoint sort the users based on the params. If params are not set,
+users are sorted by default ascending by their first name.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://users-api-rh.herokuapp.com/api/v1/users?sort=column&amp;by=asc</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Available Params</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sort</td>
+<td>string</td>
+<td>first_name</td>
+<td>first_name, last_name, username</td>
+</tr>
+<tr>
+<td>by</td>
+<td>string</td>
+<td>ASC</td>
+<td>asc, desc</td>
 </tr>
 </tbody></table>
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The User API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -290,40 +571,16 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
+<td>200</td>
+<td>OK &ndash; Everything is ok</td>
+</tr>
+<tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Bad Request &ndash; Your request bad, something is missing or the parameters are false</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Not Found &ndash; The specified user could not be found</td>
 </tr>
 <tr>
 <td>500</td>
@@ -339,8 +596,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
